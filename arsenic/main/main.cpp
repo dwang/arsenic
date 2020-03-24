@@ -36,6 +36,10 @@ namespace cheat::main {
 
 		sdk::interfaces::initialize();
 
+		printf("> finding offsets\n\n");
+
+		sdk::offsets::initialize();
+
 		printf("> finding netvars\n\n");
 
 		sdk::netvars::initialize();

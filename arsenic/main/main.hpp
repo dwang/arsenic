@@ -8,6 +8,7 @@
 #include "../sdk/interfaces.hpp"
 #include "../sdk/modules.hpp"
 #include "../sdk/netvars.hpp"
+#include "../sdk/offsets.hpp"
 #include "../utilities/remote.hpp"
 
 namespace cheat::main {

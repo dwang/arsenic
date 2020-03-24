@@ -159,6 +159,7 @@
     <ClInclude Include="sdk\interfaces.hpp" />
     <ClInclude Include="sdk\modules.hpp" />
     <ClInclude Include="sdk\netvars.hpp" />
+    <ClInclude Include="sdk\offsets.hpp" />
     <ClInclude Include="sdk\types.hpp" />
     <ClInclude Include="utilities\remote.hpp" />
   </ItemGroup>
