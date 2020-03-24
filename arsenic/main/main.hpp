@@ -5,6 +5,7 @@
 #include <thread>
 #include <Windows.h>
 
+#include "../sdk/interfaces.hpp"
 #include "../sdk/modules.hpp"
 #include "../utilities/remote.hpp"
 

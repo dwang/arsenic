@@ -32,6 +32,10 @@ namespace cheat::main {
 
 		sdk::modules::initialize();
 
+		printf("> settings up interfaces\n\n");
+
+		sdk::interfaces::initialize();
+
 		printf("> success\n");
 
 		while (!GetAsyncKeyState(VK_END)) {
