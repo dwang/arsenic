@@ -26,9 +26,10 @@ namespace cheat::main {
 
 		printf("> waiting for modules\n\n");
 
-		while (remote::find_module(L"serverbrowser.dll") == 0)
+		while (remote::find_module(L"serverbrowser.dll") == 0) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(100));
-		
+		}
+
 		sdk::modules::initialize();
 
 		printf("> success\n");
