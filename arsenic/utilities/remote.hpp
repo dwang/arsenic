@@ -31,7 +31,7 @@ namespace cheat::remote {
 
 	template<typename t>
 	inline t read_ptr32(std::uintptr_t address) {
-		return read<t>(read<std::uintptr_t>(address));
+		return read<t>(read<std::uint32_t>(address));
 	}
 
 	template<typename t>
@@ -46,6 +46,6 @@ namespace cheat::remote {
 
 	template <typename t>
 	inline NTSTATUS write_ptr32(std::uintptr_t address, t value) {
-		return write<t>(read<std::uintptr_t>(address), value);
+		return write<t>(read<std::uint32_t>(address), value);
 	}
 }

@@ -159,7 +159,7 @@ namespace cheat::remote {
 
 	std::uintptr_t find_module(const wchar_t* name) {
 		std::uintptr_t a0 = 0, a1 = 0, a2 = 0, a3[30];
-		std::uintptr_t rly[5];
+		std::uint32_t rly[5];
 
 		a3[0] = '\0';
 
@@ -193,20 +193,20 @@ namespace cheat::remote {
 
 	std::uintptr_t find_export(std::uintptr_t module, const char* name) {
 		std::uintptr_t a0;
-		std::uintptr_t a1[4], a2[30];
+		std::uint32_t a1[4], a2[30];
 
 		a2[0] = '\0';
 
 		a0 = module + read<std::uint16_t>(module + 0x3C);
-		a0 = module + read<std::uintptr_t>(a0 + 0x88 - wow64 * 16);
+		a0 = module + read<std::uint32_t>(a0 + 0x88 - wow64 * 16);
 		read(a0 + 0x18, &a1, sizeof(a1));
 
 		while (a1[0]--) {
-			a0 = read<std::uintptr_t>(module + a1[2] + (a1[0] * 4));
+			a0 = read<std::uint32_t>(module + a1[2] + (a1[0] * 4));
 			read(module + a0, &a2, sizeof(a2));
 
 			if (!_stricmp(reinterpret_cast<const char*>(a2), name)) {
-				return (module + read<std::uintptr_t>(module + a1[1] + (read<std::uint16_t>(module + a1[3] + (a1[0] * 2)) * 4)));
+				return (module + read<std::uint32_t>(module + a1[1] + (read<std::uint16_t>(module + a1[3] + (a1[0] * 2)) * 4)));
 			}
 		}
 
