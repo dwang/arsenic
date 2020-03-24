@@ -36,6 +36,10 @@ namespace cheat::main {
 
 		sdk::interfaces::initialize();
 
+		printf("> finding netvars\n\n");
+
+		sdk::netvars::initialize();
+
 		printf("> success\n");
 
 		while (!GetAsyncKeyState(VK_END)) {
