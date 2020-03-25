@@ -32,7 +32,7 @@ namespace cheat::main {
 
 		sdk::modules::initialize();
 
-		printf("> settings up interfaces\n\n");
+		printf("> setting up interfaces\n\n");
 
 		sdk::interfaces::initialize();
 
