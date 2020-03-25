@@ -3,6 +3,8 @@
 #include "types.hpp"
 #include "../utilities/remote.hpp"
 
+#include "../dependencies/xorstr/xorstr.hpp"
+
 #include <cstdint>
 #include <string>
 
@@ -42,7 +44,7 @@ namespace cheat::sdk {
 		inline interface_reg find(const wchar_t* name) {
 			std::uintptr_t v;
 
-			v = remote::find_export(remote::find_module(name), "CreateInterface");
+			v = remote::find_export(remote::find_module(name), xorstr_("CreateInterface"));
 
 			if (v == 0) {
 				throw name;
@@ -54,24 +56,24 @@ namespace cheat::sdk {
 		inline void initialize() {
 			interface_reg t;
 
-			t = interfaces::find(L"client_panorama.dll");
-			client = t.find("VClient");
-			entity = t.find("VClientEntityList");
-			t = interfaces::find(L"engine.dll");
-			engine = t.find("VEngineClient");
-			t = interfaces::find(L"vstdlib.dll");
-			cvar = t.find("VEngineCvar");
-			t = interfaces::find(L"inputsystem.dll");
-			input_system = t.find("InputSystemVersion");
+			t = interfaces::find(xorstr_(L"client_panorama.dll"));
+			client = t.find(xorstr_("VClient"));
+			entity = t.find(xorstr_("VClientEntityList"));
+			t = interfaces::find(xorstr_(L"engine.dll"));
+			engine = t.find(xorstr_("VEngineClient"));
+			t = interfaces::find(xorstr_(L"vstdlib.dll"));
+			cvar = t.find(xorstr_("VEngineCvar"));
+			t = interfaces::find(xorstr_(L"inputsystem.dll"));
+			input_system = t.find(xorstr_("InputSystemVersion"));
 
 #ifdef _DEBUG
-			printf(
+			printf(xorstr_(
 				"  VClient:                  0x%lx\n"
 				"  VClientEntityList:        0x%lx\n"
 				"  VEngineClient:            0x%lx\n"
 				"  VEngineCvar:              0x%lx\n"
 				"  InputSystemVersion:       0x%lx\n"
-				"\n",
+				"\n"),
 				client.address,
 				entity.address,
 				engine.address,

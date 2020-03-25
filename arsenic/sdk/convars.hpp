@@ -4,6 +4,8 @@
 #include "types.hpp"
 #include "../utilities/remote.hpp"
 
+#include "../dependencies/xorstr/xorstr.hpp"
+
 #include <string>
 
 namespace cheat::sdk {
@@ -61,14 +63,14 @@ namespace cheat::sdk {
 		}
 
 		inline void initialize() {
-			sensitivity = find("sensitivity");
-			mp_teammates_are_enemies = find("mp_teammates_are_enemies");
+			sensitivity = find(xorstr_("sensitivity"));
+			mp_teammates_are_enemies = find(xorstr_("mp_teammates_are_enemies"));
 
 #ifdef _DEBUG
-			printf(
+			printf(xorstr_(
 				"  sensitivity:              0x%lx\n"
 				"  mp_teammates_are_enemies: 0x%lx\n"
-				"\n",
+				"\n"),
 				sensitivity.address,
 				mp_teammates_are_enemies.address
 			);

@@ -4,6 +4,8 @@
 #include "interfaces.hpp"
 #include "../utilities/remote.hpp"
 
+#include "../dependencies/xorstr/xorstr.hpp"
+
 namespace cheat::sdk::offsets {
 	inline ptr_t dwEntityList;
 	inline ptr_t dwClientState;
@@ -27,7 +29,7 @@ namespace cheat::sdk::offsets {
 		m_dwAnalogDelta = remote::read<std::uint32_t>(interfaces::input_system.function(18) + 0x29);
 
 #ifdef _DEBUG
-		printf(
+		printf(xorstr_(
 			"  dwEntityList:             0x%lx\n"
 			"  dwClientState:            0x%lx\n"
 			"  m_dwGetLocalPlayer:       0x%x\n"
@@ -37,7 +39,7 @@ namespace cheat::sdk::offsets {
 			"  m_dwButton:               0x%x\n"
 			"  m_dwAnalog:               0x%x\n"
 			"  m_dwAnalogDelta:          0x%x\n"
-			"\n",
+			"\n"),
 			dwEntityList,
 			dwClientState,
 			m_dwGetLocalPlayer,

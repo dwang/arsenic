@@ -9,6 +9,8 @@
 #include "../sdk/offsets.hpp"
 #include "../utilities/remote.hpp"
 
+#include "../dependencies/xorstr/xorstr.hpp"
+
 #include <thread>
 #include <Windows.h>
 

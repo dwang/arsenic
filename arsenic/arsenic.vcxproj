@@ -155,6 +155,7 @@
     <ClCompile Include="utilities\remote.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="dependencies\xorstr\xorstr.hpp" />
     <ClInclude Include="main\main.hpp" />
     <ClInclude Include="sdk\convars.hpp" />
     <ClInclude Include="sdk\interfaces.hpp" />

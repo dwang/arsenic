@@ -4,6 +4,8 @@
 #include "types.hpp"
 #include "../utilities/remote.hpp"
 
+#include "../dependencies/xorstr/xorstr.hpp"
+
 #include <string>
 
 namespace cheat::sdk {
@@ -73,27 +75,27 @@ namespace cheat::sdk {
         inline void initialize() {
             netvar_table t;
 
-            t = netvars::find("DT_BasePlayer");
-            m_iHealth = t.offset("m_iHealth");
-            m_vecViewOffset = t.offset("m_vecViewOffset[0]");
-            m_lifeState = t.offset("m_lifeState");
-            m_nTickBase = t.offset("m_nTickBase");
-            m_vecVelocity = t.offset("m_vecVelocity[0]");
-            m_vecPunch = t.offset("m_Local") + 0x70;
-            m_iFOV = t.offset("m_iFOV");
-            t = netvars::find("DT_BaseEntity");
-            m_iTeamNum = t.offset("m_iTeamNum");
-            m_vecOrigin = t.offset("m_vecOrigin");
-            t = netvars::find("DT_CSPlayer");
-            m_hActiveWeapon = t.offset("m_hActiveWeapon");
-            m_iShotsFired = t.offset("m_iShotsFired");
-            m_bIsScoped = t.offset("m_bIsScoped");
-            m_iGlowIndex = t.offset("m_flFlashDuration") + 0x18;
-            t = netvars::find("DT_BaseAnimating");
-            m_dwBoneMatrix = t.offset("m_nForceBone") + 0x1C;
+            t = netvars::find(xorstr_("DT_BasePlayer"));
+            m_iHealth = t.offset(xorstr_("m_iHealth"));
+            m_vecViewOffset = t.offset(xorstr_("m_vecViewOffset[0]"));
+            m_lifeState = t.offset(xorstr_("m_lifeState"));
+            m_nTickBase = t.offset(xorstr_("m_nTickBase"));
+            m_vecVelocity = t.offset(xorstr_("m_vecVelocity[0]"));
+            m_vecPunch = t.offset(xorstr_("m_Local")) + 0x70;
+            m_iFOV = t.offset(xorstr_("m_iFOV"));
+            t = netvars::find(xorstr_("DT_BaseEntity"));
+            m_iTeamNum = t.offset(xorstr_("m_iTeamNum"));
+            m_vecOrigin = t.offset(xorstr_("m_vecOrigin"));
+            t = netvars::find(xorstr_("DT_CSPlayer"));
+            m_hActiveWeapon = t.offset(xorstr_("m_hActiveWeapon"));
+            m_iShotsFired = t.offset(xorstr_("m_iShotsFired"));
+            m_bIsScoped = t.offset(xorstr_("m_bIsScoped"));
+            m_iGlowIndex = t.offset(xorstr_("m_flFlashDuration")) + 0x18;
+            t = netvars::find(xorstr_("DT_BaseAnimating"));
+            m_dwBoneMatrix = t.offset(xorstr_("m_nForceBone")) + 0x1C;
 
 #ifdef _DEBUG
-            printf(
+            printf(xorstr_(
                 "  DT_BasePlayer:\n"
                 "    m_iHealth:              0x%x\n"
                 "    m_vecViewOffset:        0x%x\n"
@@ -112,7 +114,7 @@ namespace cheat::sdk {
                 "    m_iGlowIndex:           0x%x\n"
                 "  DT_BaseAnimating:\n"
                 "    m_dwBoneMatrix:         0x%x\n"
-                "\n",
+                "\n"),
                 m_iHealth,
                 m_vecViewOffset,
                 m_lifeState,

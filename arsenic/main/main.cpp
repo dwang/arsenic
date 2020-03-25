@@ -14,41 +14,41 @@ namespace cheat::main {
 
 	DWORD WINAPI attach(const LPVOID thread) {
 		AllocConsole();
-		freopen_s(reinterpret_cast<FILE**>(stdout), "CONOUT$", "w", stdout);
+		freopen_s(reinterpret_cast<FILE**>(stdout), xorstr_("CONOUT$"), xorstr_("w"), stdout);
 
-		printf("> arsenic\n\n");
+		printf(xorstr_("> arsenic\n\n"));
 
-		printf("> waiting for \"csgo.exe\"\n\n");
+		printf(xorstr_("> waiting for \"csgo.exe\"\n\n"));
 
-		while (!remote::attach(L"csgo.exe")) {
+		while (!remote::attach(xorstr_(L"csgo.exe"))) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		}
 
-		printf("> waiting for modules\n\n");
+		printf(xorstr_("> waiting for modules\n\n"));
 
-		while (remote::find_module(L"serverbrowser.dll") == 0) {
+		while (remote::find_module(xorstr_(L"serverbrowser.dll")) == 0) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(100));
 		}
 
 		sdk::modules::initialize();
 
-		printf("> setting up interfaces\n\n");
+		printf(xorstr_("> setting up interfaces\n\n"));
 
 		sdk::interfaces::initialize();
 
-		printf("> finding offsets\n\n");
+		printf(xorstr_("> finding offsets\n\n"));
 
 		sdk::offsets::initialize();
 
-		printf("> finding netvars\n\n");
+		printf(xorstr_("> finding netvars\n\n"));
 
 		sdk::netvars::initialize();
 
-		printf("> setting up convars\n\n");
+		printf(xorstr_("> setting up convars\n\n"));
 
 		sdk::cvar::initialize();
 
-		printf("> success\n");
+		printf(xorstr_("> success\n"));
 
 		while (!GetAsyncKeyState(VK_END) && remote::exists()) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(50));
