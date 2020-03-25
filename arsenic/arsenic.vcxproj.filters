@@ -53,5 +53,8 @@
     <ClInclude Include="dependencies\xorstr\xorstr.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="dependencies\lazy_importer\lazy_importer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

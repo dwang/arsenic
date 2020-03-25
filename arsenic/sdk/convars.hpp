@@ -4,6 +4,7 @@
 #include "types.hpp"
 #include "../utilities/remote.hpp"
 
+#include "../dependencies/lazy_importer/lazy_importer.hpp"
 #include "../dependencies/xorstr/xorstr.hpp"
 
 #include <string>
@@ -22,7 +23,7 @@ namespace cheat::sdk {
 
 		void set_string(const char* v) {
 			SHORT_STRING a0;
-			memcpy(&a0, v, strlen(v));
+			LI_FN(memcpy)(&a0, v, strlen(v));
 			remote::write_ptr<SHORT_STRING>(address + 0x24, a0);
 		}
 
@@ -54,7 +55,7 @@ namespace cheat::sdk {
 
 			a0 = remote::read_ptr32<ptr_t>(interfaces::cvar.address + 0x34);
 			while (a0 = remote::read<ptr_t>(a0 + 0x4)) {
-				if (!strcmp(name, remote::read_ptr32<SHORT_STRING>(a0 + 0xC).value)) {
+				if (!LI_FN(strcmp)(name, remote::read_ptr32<SHORT_STRING>(a0 + 0xC).value)) {
 					return *reinterpret_cast<convar*>(&a0);
 				}
 			}

@@ -9,6 +9,7 @@
 #include "../sdk/offsets.hpp"
 #include "../utilities/remote.hpp"
 
+#include "../dependencies/lazy_importer/lazy_importer.hpp"
 #include "../dependencies/xorstr/xorstr.hpp"
 
 #include <thread>

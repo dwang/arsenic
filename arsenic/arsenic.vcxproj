@@ -155,6 +155,7 @@
     <ClCompile Include="utilities\remote.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="dependencies\lazy_importer\lazy_importer.hpp" />
     <ClInclude Include="dependencies\xorstr\xorstr.hpp" />
     <ClInclude Include="main\main.hpp" />
     <ClInclude Include="sdk\convars.hpp" />
