@@ -2,15 +2,15 @@
 
 #define WIN32_LEAN_AND_MEAN
 
-#include <thread>
-#include <Windows.h>
-
 #include "../sdk/convars.hpp"
 #include "../sdk/interfaces.hpp"
 #include "../sdk/modules.hpp"
 #include "../sdk/netvars.hpp"
 #include "../sdk/offsets.hpp"
 #include "../utilities/remote.hpp"
+
+#include <thread>
+#include <Windows.h>
 
 namespace cheat::main {
 	extern BOOL WINAPI detach();
