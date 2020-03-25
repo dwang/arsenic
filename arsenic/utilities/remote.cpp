@@ -136,7 +136,7 @@ namespace cheat::remote {
 				wow64 = IS_WOW64_ADDRESS(entry.start);
 				peb = teb_to_peb(handle, entry.teb, wow64);
 #ifdef _DEBUG
-				printf(xorstr_("  %ls:                 %d\n\n"), name, entry.pid);
+				printf(xorstr_("  %ls:                  %d\n\n"), name, entry.pid);
 #endif
 				break;
 			}

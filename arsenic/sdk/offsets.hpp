@@ -32,16 +32,16 @@ namespace cheat::sdk::offsets {
 
 #ifdef _DEBUG
 		printf(xorstr_(
-			"  dwEntityList:             0x%lx\n"
-			"  dwClientState:            0x%lx\n"
-			"  m_dwGetLocalPlayer:       0x%x\n"
-			"  m_dwViewAngles:           0x%x\n"
-			"  m_dwMaxClients:           0x%x\n"
-			"  m_dwState:                0x%x\n"
-			"  m_dwButton:               0x%x\n"
-			"  m_dwAnalog:               0x%x\n"
-			"  m_dwAnalogDelta:          0x%x\n"
-			"  m_bDormant:               0x%x\n"
+			"  dwEntityList:              0x%lx\n"
+			"  dwClientState:             0x%lx\n"
+			"  m_dwGetLocalPlayer:        0x%x\n"
+			"  m_dwViewAngles:            0x%x\n"
+			"  m_dwMaxClients:            0x%x\n"
+			"  m_dwState:                 0x%x\n"
+			"  m_dwButton:                0x%x\n"
+			"  m_dwAnalog:                0x%x\n"
+			"  m_dwAnalogDelta:           0x%x\n"
+			"  m_bDormant:                0x%x\n"
 			"\n"),
 			dwEntityList,
 			dwClientState,
