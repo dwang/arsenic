@@ -46,7 +46,7 @@ namespace cheat::main {
 
 		printf("> success\n");
 
-		while (!GetAsyncKeyState(VK_END)) {
+		while (!GetAsyncKeyState(VK_END) && remote::exists()) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(50));
 		}
 
