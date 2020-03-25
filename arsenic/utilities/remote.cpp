@@ -23,7 +23,6 @@
 #define IS_WOW64_ADDRESS(address) (address <= 0xffffffffUL)
 
 extern "C" {
-	typedef int BOOL;
 	typedef void* voidptr_t;
 	typedef long NTSTATUS;
 #define NTAPI __stdcall
@@ -34,7 +33,6 @@ extern "C" {
 	DECLSPEC_IMPORT NTSTATUS NTAPI NtReadVirtualMemory(HANDLE, PVOID, PVOID, std::size_t, std::size_t*);
 	DECLSPEC_IMPORT NTSTATUS NTAPI NtWriteVirtualMemory(HANDLE, PVOID, PVOID, std::size_t, std::size_t*);
 	DECLSPEC_IMPORT HANDLE WINAPI OpenProcess(std::uint32_t, std::uint32_t, std::uint32_t);
-	DECLSPEC_IMPORT BOOL WINAPI GetExitCodeProcess(HANDLE, std::uint32_t*);
 }
 
 struct process_entry {
