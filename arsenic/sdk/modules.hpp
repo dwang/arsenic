@@ -14,8 +14,8 @@ namespace cheat::sdk::modules {
 
 #ifdef _DEBUG
 		printf(xorstr_(
-			"  client_panorama.dll:       0x%lx\n"
-			"  engine.dll:                0x%lx\n"
+			"  client_panorama.dll:      0x%lx\n"
+			"  engine.dll:               0x%lx\n"
 			"\n"),
 			client,
 			engine

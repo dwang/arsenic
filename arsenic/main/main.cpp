@@ -2,8 +2,6 @@
 
 namespace cheat::main {
 	BOOL WINAPI detach() {
-		sdk::cvar::mp_weapons_glow_on_ground.set_int(0);
-
 		if (remote::exists()) {
 			remote::detach();
 		}
@@ -49,8 +47,6 @@ namespace cheat::main {
 		printf(xorstr_("> setting up convars\n\n"));
 
 		sdk::cvar::initialize();
-
-		sdk::cvar::mp_weapons_glow_on_ground.set_int(1);
 
 		printf(xorstr_("> success\n"));
 

@@ -49,7 +49,6 @@ namespace cheat::sdk {
 	namespace cvar {
 		inline convar sensitivity;
 		inline convar mp_teammates_are_enemies;
-		inline convar mp_weapons_glow_on_ground;
 
 		inline convar find(const char* name) {
 			ptr_t a0;
@@ -67,17 +66,14 @@ namespace cheat::sdk {
 		inline void initialize() {
 			sensitivity = find(xorstr_("sensitivity"));
 			mp_teammates_are_enemies = find(xorstr_("mp_teammates_are_enemies"));
-			mp_weapons_glow_on_ground = find(xorstr_("mp_weapons_glow_on_ground"));
 
 #ifdef _DEBUG
 			printf(xorstr_(
-				"  sensitivity:               0x%lx\n"
-				"  mp_teammates_are_enemies:  0x%lx\n"
-				"  mp_weapons_glow_on_ground: 0x%lx\n"
+				"  sensitivity:              0x%lx\n"
+				"  mp_teammates_are_enemies: 0x%lx\n"
 				"\n"),
 				sensitivity.address,
-				mp_teammates_are_enemies.address,
-				mp_weapons_glow_on_ground.address
+				mp_teammates_are_enemies.address
 			);
 #endif
 		}

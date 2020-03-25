@@ -69,11 +69,11 @@ namespace cheat::sdk {
 
 #ifdef _DEBUG
 			printf(xorstr_(
-				"  VClient018:                0x%lx\n"
-				"  VClientEntityList003:      0x%lx\n"
-				"  VEngineClient014:          0x%lx\n"
-				"  VEngineCvar007:            0x%lx\n"
-				"  InputSystemVersion001:     0x%lx\n"
+				"  VClient018:               0x%lx\n"
+				"  VClientEntityList003:     0x%lx\n"
+				"  VEngineClient014:         0x%lx\n"
+				"  VEngineCvar007:           0x%lx\n"
+				"  InputSystemVersion001:    0x%lx\n"
 				"\n"),
 				client.address,
 				entity.address,
