@@ -16,7 +16,8 @@ namespace cheat::sdk::offsets {
 	inline std::uint32_t m_dwState;
 	inline std::uint32_t m_dwAnalog;
 	inline std::uint32_t m_dwAnalogDelta;
-	
+	inline std::uint32_t m_bDormant;
+
 	inline void initialize() {
 		dwEntityList = interfaces::entity.address - (remote::read<std::uint32_t>(interfaces::entity.function(5) + 0x22) - 0x38);
 		dwClientState = remote::read_ptr32<ptr_t>(interfaces::engine.function(18) + 0x16);
@@ -27,6 +28,7 @@ namespace cheat::sdk::offsets {
 		m_dwButton = remote::read<std::uint32_t>(interfaces::input_system.function(15) + 0x21D);
 		m_dwAnalog = remote::read<std::uint32_t>(interfaces::input_system.function(18) + 0x09);
 		m_dwAnalogDelta = remote::read<std::uint32_t>(interfaces::input_system.function(18) + 0x29);
+		m_bDormant = 0xED;
 
 #ifdef _DEBUG
 		printf(xorstr_(
@@ -39,6 +41,7 @@ namespace cheat::sdk::offsets {
 			"  m_dwButton:               0x%x\n"
 			"  m_dwAnalog:               0x%x\n"
 			"  m_dwAnalogDelta:          0x%x\n"
+			"  m_bDormant:               0x%x\n"
 			"\n"),
 			dwEntityList,
 			dwClientState,
@@ -48,7 +51,8 @@ namespace cheat::sdk::offsets {
 			m_dwState,
 			m_dwButton,
 			m_dwAnalog,
-			m_dwAnalogDelta
+			m_dwAnalogDelta,
+			m_bDormant
 		);
 #endif
 	}
