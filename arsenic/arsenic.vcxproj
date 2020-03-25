@@ -156,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main\main.hpp" />
+    <ClInclude Include="sdk\convars.hpp" />
     <ClInclude Include="sdk\interfaces.hpp" />
     <ClInclude Include="sdk\modules.hpp" />
     <ClInclude Include="sdk\netvars.hpp" />

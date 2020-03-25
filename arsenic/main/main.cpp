@@ -44,6 +44,10 @@ namespace cheat::main {
 
 		sdk::netvars::initialize();
 
+		printf("> setting up convars\n\n");
+
+		sdk::cvar::initialize();
+
 		printf("> success\n");
 
 		while (!GetAsyncKeyState(VK_END) && remote::exists()) {
