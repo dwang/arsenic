@@ -152,9 +152,8 @@ namespace cheat::remote {
 	}
 
 	bool exists() {
-		std::uint32_t e;
-		GetExitCodeProcess(handle, &e);
-		return e == 0x00000103;
+		char b;
+		return read(peb, &b, 1) == 0l;
 	}
 
 	std::uintptr_t find_module(const wchar_t* name) {
