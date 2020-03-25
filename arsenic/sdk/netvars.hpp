@@ -65,7 +65,7 @@ namespace cheat::sdk {
 
             do {
                 a1 = remote::read<ptr_t>(a0 + 0xC);
-                if (LI_FN(strcmp)(remote::read_ptr32<SHORT_STRING>(a1 + 0xC).value, name) == 0) {
+                if (LI_FN(strcmp).safe_cached()(remote::read_ptr32<SHORT_STRING>(a1 + 0xC).value, name) == 0) {
                     return  *reinterpret_cast<netvar_table*>(&a1);
                 }
             } while (a0 = remote::read<ptr_t>(a0 + 0x10));

@@ -26,7 +26,7 @@ namespace cheat::sdk {
 
 			do {
 				remote::read(remote::read<ptr_t>(a0 + 0x4), &a1, sizeof(a1));
-				if ((LI_FN(_stricmp)(reinterpret_cast<const char*>(a1), name) >> 5) == 1) {
+				if ((_stricmp(reinterpret_cast<const char*>(a1), name) >> 5) == 1) {
 					return remote::read<virtual_table>(remote::read<ptr_t>(a0) + 1);
 				}
 			} while (a0 = remote::read<ptr_t>(a0 + 0x8));

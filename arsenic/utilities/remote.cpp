@@ -53,7 +53,7 @@ void* create_snapshot() {
 	std::uint32_t length = 0;
 	NTSTATUS status;
 
-	status = LI_FN(NtQuerySystemInformation)(57, &length, SNAP_LENGTH, &length);
+	status = LI_FN(NtQuerySystemInformation).nt_safe_cached()(57, &length, SNAP_LENGTH, &length);
 
 	if (status != 0xC0000004L) {
 		return 0;
@@ -63,7 +63,7 @@ void* create_snapshot() {
 
 	length += 4096;
 	snap->first = new char[length];
-	status = LI_FN(NtQuerySystemInformation)(57, snap->first, length, &length);
+	status = LI_FN(NtQuerySystemInformation).nt_safe_cached()(57, snap->first, length, &length);
 
 	if (status != 0L) {
 		delete[] snap->first;
@@ -111,7 +111,7 @@ std::uintptr_t teb_to_peb(HANDLE process, std::uintptr_t teb, bool wow64) {
 		length = 8, offset = 0x60;
 	}
 
-	NtReadVirtualMemory(process, reinterpret_cast<PVOID>(reinterpret_cast<char*>(teb) + offset), &peb, length, 0);
+	LI_FN(NtReadVirtualMemory).nt_safe_cached()(process, reinterpret_cast<PVOID>(reinterpret_cast<char*>(teb) + offset), &peb, length, 0);
 
 	return peb;
 }
@@ -132,7 +132,7 @@ namespace cheat::remote {
 
 		while (get_next_process(snap, &entry)) {
 			if (!LI_FN(_wcsicmp)(entry.name, name)) {
-				handle = LI_FN(OpenProcess)(0x1fffff, 0, entry.pid);
+				handle = LI_FN(OpenProcess).safe_cached()(0x1fffff, 0, entry.pid);
 				wow64 = IS_WOW64_ADDRESS(entry.start);
 				peb = teb_to_peb(handle, entry.teb, wow64);
 #ifdef _DEBUG
@@ -148,7 +148,7 @@ namespace cheat::remote {
 
 	void detach() {
 		if (handle != 0) {
-			LI_FN(NtClose)(handle);
+			LI_FN(NtClose).nt_safe()(handle);
 		}
 	}
 
@@ -178,7 +178,7 @@ namespace cheat::remote {
 			read(a0 + rly[3], &a2, rly[0]);
 			read(a2, &a3, sizeof(a3));
 
-			if (LI_FN(_wcsicmp)(reinterpret_cast<const wchar_t*>(a3), name) == 0) {
+			if (LI_FN(_wcsicmp).safe_cached()(reinterpret_cast<const wchar_t*>(a3), name) == 0) {
 				read(a0 + rly[4], &a0, rly[0]);
 				return a0;
 			}
@@ -205,7 +205,7 @@ namespace cheat::remote {
 			a0 = read<std::uint32_t>(module + a1[2] + (a1[0] * 4));
 			read(module + a0, &a2, sizeof(a2));
 
-			if (!LI_FN(_stricmp)(reinterpret_cast<const char*>(a2), name)) {
+			if (!LI_FN(_stricmp).safe_cached()(reinterpret_cast<const char*>(a2), name)) {
 				return (module + read<std::uint32_t>(module + a1[1] + (read<std::uint16_t>(module + a1[3] + (a1[0] * 2)) * 4)));
 			}
 		}
@@ -214,10 +214,10 @@ namespace cheat::remote {
 	}
 
 	NTSTATUS read(std::uintptr_t address, void* buffer, std::size_t length) {
-		return NtReadVirtualMemory(handle, reinterpret_cast<PVOID>(address), buffer, length, 0);
+		return LI_FN(NtReadVirtualMemory).nt_safe_cached()(handle, reinterpret_cast<PVOID>(address), buffer, length, 0);
 	}
 
 	NTSTATUS write(std::uintptr_t address, void* buffer, std::size_t length) {
-		return NtWriteVirtualMemory(handle, reinterpret_cast<PVOID>(address), buffer, length, 0);
+		return LI_FN(NtWriteVirtualMemory).nt_safe_cached()(handle, reinterpret_cast<PVOID>(address), buffer, length, 0);
 	}
 }

@@ -7,13 +7,13 @@ namespace cheat::main {
 		}
 
 		fclose(reinterpret_cast<FILE*>(stdout));
-		LI_FN(FreeConsole)();
+		LI_FN(FreeConsole).safe()();
 
 		return TRUE;
 	}
 
 	DWORD WINAPI attach(const LPVOID thread) {
-		LI_FN(AllocConsole)();
+		LI_FN(AllocConsole).safe()();
 		freopen_s(reinterpret_cast<FILE**>(stdout), xorstr_("CONOUT$"), xorstr_("w"), stdout);
 
 		printf(xorstr_("> arsenic\n\n"));
@@ -50,13 +50,13 @@ namespace cheat::main {
 
 		printf(xorstr_("> success\n"));
 
-		while (!LI_FN(GetAsyncKeyState)(VK_END) && remote::exists()) {
+		while (!LI_FN(GetAsyncKeyState).safe_cached()(VK_END) && remote::exists()) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(50));
 		}
 
 		detach();
 
-		LI_FN(FreeLibraryAndExitThread)(static_cast<HMODULE>(thread), EXIT_SUCCESS);
+		LI_FN(FreeLibraryAndExitThread).safe()(static_cast<HMODULE>(thread), EXIT_SUCCESS);
 
 		return TRUE;
 	}

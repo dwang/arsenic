@@ -55,7 +55,7 @@ namespace cheat::sdk {
 
 			a0 = remote::read_ptr32<ptr_t>(interfaces::cvar.address + 0x34);
 			while (a0 = remote::read<ptr_t>(a0 + 0x4)) {
-				if (!LI_FN(strcmp)(name, remote::read_ptr32<SHORT_STRING>(a0 + 0xC).value)) {
+				if (!LI_FN(strcmp).safe_cached()(name, remote::read_ptr32<SHORT_STRING>(a0 + 0xC).value)) {
 					return *reinterpret_cast<convar*>(&a0);
 				}
 			}
