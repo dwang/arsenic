@@ -26,7 +26,7 @@ namespace cheat::sdk {
 
 			do {
 				remote::read(remote::read<ptr_t>(a0 + 0x4), &a1, sizeof(a1));
-				if ((_stricmp(reinterpret_cast<const char*>(a1), name) >> 5) == 1) {
+				if (LI_FN(strcmp).safe_cached()(reinterpret_cast<const char*>(a1), name) == 0) {
 					return remote::read<virtual_table>(remote::read<ptr_t>(a0) + 1);
 				}
 			} while (a0 = remote::read<ptr_t>(a0 + 0x8));
@@ -58,22 +58,22 @@ namespace cheat::sdk {
 			interface_reg t;
 
 			t = interfaces::find(xorstr_(L"client_panorama.dll"));
-			client = t.find(xorstr_("VClient"));
-			entity = t.find(xorstr_("VClientEntityList"));
+			client = t.find(xorstr_("VClient018"));
+			entity = t.find(xorstr_("VClientEntityList003"));
 			t = interfaces::find(xorstr_(L"engine.dll"));
-			engine = t.find(xorstr_("VEngineClient"));
+			engine = t.find(xorstr_("VEngineClient014"));
 			t = interfaces::find(xorstr_(L"vstdlib.dll"));
-			cvar = t.find(xorstr_("VEngineCvar"));
+			cvar = t.find(xorstr_("VEngineCvar007"));
 			t = interfaces::find(xorstr_(L"inputsystem.dll"));
-			input_system = t.find(xorstr_("InputSystemVersion"));
+			input_system = t.find(xorstr_("InputSystemVersion001"));
 
 #ifdef _DEBUG
 			printf(xorstr_(
-				"  VClient:                  0x%lx\n"
-				"  VClientEntityList:        0x%lx\n"
-				"  VEngineClient:            0x%lx\n"
-				"  VEngineCvar:              0x%lx\n"
-				"  InputSystemVersion:       0x%lx\n"
+				"  VClient018:               0x%lx\n"
+				"  VClientEntityList003:     0x%lx\n"
+				"  VEngineClient014:         0x%lx\n"
+				"  VEngineCvar007:           0x%lx\n"
+				"  InputSystemVersion001:    0x%lx\n"
 				"\n"),
 				client.address,
 				entity.address,
