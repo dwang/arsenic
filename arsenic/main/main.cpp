@@ -1,5 +1,17 @@
 #include "main.hpp"
 
+#include "../sdk/convars.hpp"
+#include "../sdk/interfaces.hpp"
+#include "../sdk/modules.hpp"
+#include "../sdk/netvars.hpp"
+#include "../sdk/offsets.hpp"
+#include "../utilities/remote.hpp"
+
+#include "../dependencies/lazy_importer/lazy_importer.hpp"
+#include "../dependencies/xorstr/xorstr.hpp"
+
+#include <thread>
+
 namespace cheat::main {
 	BOOL WINAPI detach() {
 		if (remote::exists()) {
