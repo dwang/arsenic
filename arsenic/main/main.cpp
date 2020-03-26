@@ -3,6 +3,7 @@
 #include "../sdk/convars.hpp"
 #include "../sdk/engine.hpp"
 #include "../sdk/entities.hpp"
+#include "../sdk/input_system.hpp"
 #include "../sdk/interfaces.hpp"
 #include "../sdk/modules.hpp"
 #include "../sdk/netvars.hpp"
@@ -72,7 +73,7 @@ namespace cheat::main {
 
 		printf(xorstr_("> success\n"));
 
-		while (!LI_FN(GetAsyncKeyState).safe_cached()(VK_END) && sdk::engine::is_running()) {
+		while (!sdk::input_system::is_button_down(sdk::input_system::_BUTTONCODE::END) && sdk::engine::is_running()) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(50));
 		}
 		

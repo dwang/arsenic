@@ -161,6 +161,7 @@
     <ClInclude Include="sdk\convars.hpp" />
     <ClInclude Include="sdk\engine.hpp" />
     <ClInclude Include="sdk\entities.hpp" />
+    <ClInclude Include="sdk\input_system.hpp" />
     <ClInclude Include="sdk\interfaces.hpp" />
     <ClInclude Include="sdk\modules.hpp" />
     <ClInclude Include="sdk\netvars.hpp" />
