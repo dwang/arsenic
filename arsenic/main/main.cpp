@@ -2,6 +2,7 @@
 
 #include "../sdk/convars.hpp"
 #include "../sdk/engine.hpp"
+#include "../sdk/entities.hpp"
 #include "../sdk/interfaces.hpp"
 #include "../sdk/modules.hpp"
 #include "../sdk/netvars.hpp"
@@ -11,6 +12,8 @@
 #include "../dependencies/lazy_importer/lazy_importer.hpp"
 #include "../dependencies/xorstr/xorstr.hpp"
 
+#include <atomic>
+#include <functional>
 #include <thread>
 
 namespace cheat::main {
@@ -61,11 +64,21 @@ namespace cheat::main {
 
 		sdk::cvar::initialize();
 
+		printf(xorstr_("> setting up threads\n\n"));
+
+		std::atomic<bool> active = true;
+
+		std::thread update_entity_info(sdk::update_entity_info, std::ref(active));
+
 		printf(xorstr_("> success\n"));
 
 		while (!LI_FN(GetAsyncKeyState).safe_cached()(VK_END) && sdk::engine::is_running()) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(50));
 		}
+		
+		active = false;
+
+		update_entity_info.join();
 
 		detach();
 
