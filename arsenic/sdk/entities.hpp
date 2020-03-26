@@ -11,8 +11,6 @@
 #include <thread>
 #include <vector>
 
-
-#include <iostream>
 namespace cheat::sdk {
 	struct entity {
 		ptr_t address;
