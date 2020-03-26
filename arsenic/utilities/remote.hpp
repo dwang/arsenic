@@ -3,7 +3,7 @@
 #include <cstdint>
 #include <cstddef>
 
-typedef void* HANDLE, * PVOID;
+typedef void* HANDLE, *PVOID;
 typedef long NTSTATUS;
 
 namespace cheat::remote {
