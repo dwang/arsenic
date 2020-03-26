@@ -1,6 +1,7 @@
 #include "main.hpp"
 
 #include "../sdk/convars.hpp"
+#include "../sdk/engine.hpp"
 #include "../sdk/interfaces.hpp"
 #include "../sdk/modules.hpp"
 #include "../sdk/netvars.hpp"
@@ -62,7 +63,7 @@ namespace cheat::main {
 
 		printf(xorstr_("> success\n"));
 
-		while (!LI_FN(GetAsyncKeyState).safe_cached()(VK_END) && remote::exists()) {
+		while (!LI_FN(GetAsyncKeyState).safe_cached()(VK_END) && sdk::engine::is_running()) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(50));
 		}
 
