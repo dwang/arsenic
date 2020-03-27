@@ -29,7 +29,6 @@ namespace cheat::sdk {
 		vec3 velocity;
 		vec3 punch;
 		int fov;
-		int glow_index;
 
 		entity() {
 			update();
@@ -60,7 +59,6 @@ namespace cheat::sdk {
 			velocity = *reinterpret_cast<vec3*>(chunk.data() + netvars::m_vecVelocity);
 			punch = *reinterpret_cast<vec3*>(chunk.data() + netvars::m_vecPunch);
 			fov = *reinterpret_cast<int*>(chunk.data() + netvars::m_iFOV);
-			glow_index = *reinterpret_cast<int*>(chunk.data() + netvars::m_iGlowIndex);
 		}
 	};
 
