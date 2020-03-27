@@ -1,5 +1,6 @@
 #pragma once
 
+#include "engine.hpp"
 #include "netvars.hpp"
 #include "offsets.hpp"
 #include "types.hpp"
@@ -67,10 +68,9 @@ namespace cheat::sdk {
 	}
 
 	inline std::vector<entity> entities;
-
 	inline std::shared_mutex entity_mutex;
 
-	void update_entity_info(std::atomic<bool>& active) {
+	inline void update_entity_info(std::atomic<bool>& active) {
 		while (active) {
 			if (!engine::is_in_game()) {
 				continue;
@@ -82,10 +82,10 @@ namespace cheat::sdk {
 
 			int max_clients = engine::get_max_clients();
 
-			sdk::entities.resize(max_clients);
+			entities.resize(max_clients);
 
 			for (int i = 1; i <= max_clients; i++) {
-				sdk::entities.at(i - 1) = get_client_entity(i);
+				entities.at(i - 1) = get_client_entity(i);
 			}
 
 			entity_mutex.unlock();
