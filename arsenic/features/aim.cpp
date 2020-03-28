@@ -176,8 +176,8 @@ namespace cheat::features {
 	}
 
 	void aim_assist(sdk::entity local_player, sdk::vec3 vangle) {
-		static float sensitivity = sdk::cvar::sensitivity.get_float();
 		static int mp_teammates_are_enemies = sdk::cvar::mp_teammates_are_enemies.get_int();
+		float sensitivity = sdk::cvar::sensitivity.get_float();
 
 		current_tick = local_player.tick_count;
 
