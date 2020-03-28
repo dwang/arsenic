@@ -6,7 +6,7 @@
 #define DEG2RAD(x) (static_cast<float>(x) * static_cast<float>(3.14159265358979323846f / 180.0f))
 
 namespace cheat::math {
-	extern float sincos(float radians, float* sine, float* cosine);
+	extern void sincos(float radians, float* sine, float* cosine);
 	extern void angle_vec(sdk::vec3 angles, sdk::vec3* forward);
 	extern float vec_dot(sdk::vec3 v0, sdk::vec3 v1);
 	extern float vec_length(sdk::vec3 v);
