@@ -175,8 +175,56 @@ namespace cheat::features {
 		}
 	}
 
-	void aim_assist(sdk::entity local_player, sdk::vec3 vangle) {
-		static int mp_teammates_are_enemies = sdk::cvar::mp_teammates_are_enemies.get_int();
+	int crosshair_id(sdk::vec3 vangle, sdk::entity self, bool mp_teammates_are_enemies) {
+		sdk::vec3 dir, eye;
+		int i, id, j;
+		sdk::matrix3x4_t matrix;
+		bool status;
+
+		i = 1;
+		dir = math::vec_atd(vangle);
+		eye = self.eye_pos;
+
+		for (auto& entity : sdk::entities) {
+			if (!entity.is_valid()) {
+				continue;
+			}
+
+			id = entity.team;
+
+			if (!mp_teammates_are_enemies && self.team == id) {
+				continue;
+			}
+
+			id -= 2;
+
+			for (j = 6; j--;) {
+				entity.get_bone_matrix(hitbox_list[id][j].bone, &matrix);
+				status = math::vec_min_max(eye, dir, math::vec_transform(hitbox_list[id][j].min, matrix), math::vec_transform(hitbox_list[id][j].max, matrix), hitbox_list[id][j].radius);
+
+				if (status) {
+					return i;
+				}
+			}
+
+			i++;
+		}
+
+		return 0;
+	}
+
+	void triggerbot(sdk::entity local_player, sdk::vec3 vangle, bool mp_teammates_are_enemies) {
+		if (sdk::input_system::is_button_down(sdk::input_system::MOUSE_5)) {
+			if (crosshair_id(vangle, local_player, mp_teammates_are_enemies)) {
+				mouse1_down();
+				std::this_thread::sleep_for(std::chrono::milliseconds(1));
+				mouse1_up();
+				std::this_thread::sleep_for(std::chrono::milliseconds(50));
+			}
+		}
+	}
+
+	void aim_assist(sdk::entity local_player, sdk::vec3 vangle, bool mp_teammates_are_enemies) {
 		float sensitivity = sdk::cvar::sensitivity.get_float();
 
 		current_tick = local_player.tick_count;
@@ -207,10 +255,13 @@ namespace cheat::features {
 			}
 
 			static auto local_player = sdk::get_client_entity(sdk::engine::get_local_player());
+			
+			static int mp_teammates_are_enemies = sdk::cvar::mp_teammates_are_enemies.get_int();
 
 			sdk::vec3 vangle = sdk::engine::get_view_angles();
 
-			aim_assist(local_player, vangle);
+			aim_assist(local_player, vangle, mp_teammates_are_enemies);
+			triggerbot(local_player, vangle, mp_teammates_are_enemies);
 
 			sdk::entity_mutex.unlock_shared();
 
