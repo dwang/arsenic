@@ -27,6 +27,9 @@
     <ClCompile Include="utilities\math.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="features\aim.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main\main.hpp">
@@ -69,6 +72,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="utilities\math.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="features\aim.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,5 +1,6 @@
 #include "main.hpp"
 
+#include "../features/aim.hpp"
 #include "../sdk/convars.hpp"
 #include "../sdk/engine.hpp"
 #include "../sdk/entities.hpp"
@@ -70,16 +71,18 @@ namespace cheat::main {
 		std::atomic<bool> active = true;
 
 		std::thread update_entity_info(sdk::update_entity_info, std::ref(active));
+		std::thread aim(features::aim, std::ref(active));
 
 		printf(xorstr_("> success\n"));
 
-		while (!sdk::input_system::is_button_down(sdk::input_system::_BUTTONCODE::END) && sdk::engine::is_running()) {
+		while (!sdk::input_system::is_button_down(sdk::input_system::END) && sdk::engine::is_running()) {
 			std::this_thread::sleep_for(std::chrono::milliseconds(50));
 		}
 		
 		active = false;
 
 		update_entity_info.join();
+		aim.join();
 
 		detach();
 

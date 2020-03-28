@@ -61,6 +61,21 @@ namespace cheat::sdk {
 			punch = *reinterpret_cast<vec3*>(chunk.data() + netvars::m_vecPunch);
 			fov = *reinterpret_cast<int*>(chunk.data() + netvars::m_iFOV);
 		}
+
+		ptr_t get_weapon() {
+			ptr_t v;
+
+			v = remote::read<ptr_t>(address + netvars::m_hActiveWeapon);
+			return remote::read<ptr_t>(offsets::dwEntityList + ((v & 0xFFF) - 1) * 0x10);
+		}
+
+		void get_bone_matrix(int index, matrix3x4_t* out) {
+			remote::read(remote::read<ptr_t>(address + netvars::m_dwBoneMatrix) + 0x30 * index, out, sizeof(matrix3x4_t));
+		}
+
+		bool is_valid() {
+			return address && (health > 0) && !dormant;
+		}
 	};
 
 	inline entity get_client_entity(int index) {

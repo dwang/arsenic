@@ -151,6 +151,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="entry.cpp" />
+    <ClCompile Include="features\aim.cpp" />
     <ClCompile Include="main\main.cpp" />
     <ClCompile Include="utilities\math.cpp" />
     <ClCompile Include="utilities\remote.cpp" />
@@ -158,6 +159,7 @@
   <ItemGroup>
     <ClInclude Include="dependencies\lazy_importer\lazy_importer.hpp" />
     <ClInclude Include="dependencies\xorstr\xorstr.hpp" />
+    <ClInclude Include="features\aim.hpp" />
     <ClInclude Include="main\main.hpp" />
     <ClInclude Include="sdk\convars.hpp" />
     <ClInclude Include="sdk\engine.hpp" />
