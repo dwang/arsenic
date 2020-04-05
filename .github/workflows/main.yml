@@ -1,0 +1,49 @@
+name: arsenic
+
+on: push
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.0
+
+    - name: Build arsenic (x86/debug)
+      working-directory: ./arsenic
+      run: msbuild arsenic.vcxproj /p:Platform=Win32 /p:Configuration=Debug
+
+    - name: SHA1 arsenic (x86/debug)
+      working-directory: ./output/x86/debug
+      run: sha1sum arsenic.dll > arsenic.dll.sha1
+
+    - name: Build arsenic (x86/release)
+      working-directory: ./arsenic
+      run: msbuild arsenic.vcxproj /p:Platform=Win32 /p:Configuration=Release
+
+    - name: SHA1 arsenic (x86/release)
+      working-directory: ./output/x86/release
+      run: sha1sum arsenic.dll > arsenic.dll.sha1
+
+    - name: Build arsenic (x64/debug)
+      working-directory: ./arsenic
+      run: msbuild arsenic.vcxproj /p:Platform=x64 /p:Configuration=Debug
+
+    - name: SHA1 arsenic (x64/debug)
+      working-directory: ./output/x64/debug
+      run: sha1sum arsenic.dll > arsenic.dll.sha1
+
+    - name: Build arsenic (x64/release)
+      working-directory: ./arsenic
+      run: msbuild arsenic.vcxproj /p:Platform=x64 /p:Configuration=Release
+
+    - name: SHA1 arsenic (x64/release)
+      working-directory: ./output/x64/release
+      run: sha1sum arsenic.dll > arsenic.dll.sha1
+
+    - uses: actions/upload-artifact@v1
+      with:
+        name: arsenic
+        path: ./output
